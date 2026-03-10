@@ -76,6 +76,7 @@ def create_monthly_checklist(year, month, dept, lab, loc):
     # 기존 연도/월 지우기 영역
     draw.rectangle([(658, 47), (808, 88)], fill="white") 
     draw.rectangle([(827, 47), (897, 88)], fill="white") 
+    draw.rectangle([(1049, 105), (1400, 161)], fill="white") 
     
     # 폰트 설정
     try:
@@ -170,5 +171,6 @@ if st.button("점검표 생성하기", type="primary", width="stretch"):
                 mime="image/png",
                 width="stretch"
             )
+
 
 
