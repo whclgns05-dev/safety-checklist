@@ -91,6 +91,11 @@ def create_monthly_checklist(year, month):
         
     draw.text((668, 47), f"{year}년도", font=font, fill="black")
     draw.text((837, 47), f"{month}월", font=font, fill="black")
+
+    # 2. [추가됨] 웹에서 입력받은 소속, 연구실명, 위치 쓰기
+    draw.text(coord_dept, dept, font=font_info, fill="black")
+    draw.text(coord_lab, lab, font=font_info, fill="black")
+    draw.text(coord_loc, loc, font=font_info, fill="black")
     # ---------------------------------------------------------
 
     # 평일에만 동그라미 및 서명 도장 찍기
@@ -160,4 +165,5 @@ if st.button("점검표 생성하기", type="primary", width="stretch"):
                 width="stretch"
 
             )
+
 
