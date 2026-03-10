@@ -156,7 +156,7 @@ with col2:
 
 if st.button("점검표 생성하기", type="primary", width="stretch"):
     with st.spinner('달력을 분석하고 문서를 작성 중입니다...'):
-        generated_img = create_monthly_checklist(selected_year, selected_month)
+        generated_img = create_monthly_checklist(selected_year, selected_month, input_dept, input_lab, input_loc)
         
         if generated_img:
             st.success(f"{selected_year}년 {selected_month}월 안전점검표가 성공적으로 생성되었습니다!")
@@ -177,6 +177,7 @@ if st.button("점검표 생성하기", type="primary", width="stretch"):
                 width="stretch"
 
             )
+
 
 
 
