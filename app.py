@@ -12,6 +12,13 @@ import io
 # -------------------------------------------------------------------------
 def create_monthly_checklist(year, month):
     base_image_path = "image_3e5ff8.png"  # 빈 양식 파일명
+    # ---------------------------------------------------------
+    # 📍 [필수 수정] 새로 추가된 텍스트 입력 좌표 (그림판/추출기로 찾아서 변경하세요!)
+    # ---------------------------------------------------------
+    coord_dept = (1049, 106) # '소속' 글자를 쓸 시작 X, Y 좌표 (예시)
+    coord_lab = (1049, 125)  # '연구실명' 글자를 쓸 시작 X, Y 좌표 (예시)
+    coord_loc = (1049, 144) # '위치' 글자를 쓸 시작 X, Y 좌표 (예시)
+    # ---------------------------------------------------------
     
     # [좌표 설정부] 마우스 좌표 추출기로 직접 찾은 1~31일의 정확한 X좌표 31개
     circle_x_list = [
@@ -78,6 +85,7 @@ def create_monthly_checklist(year, month):
     
     try:
         font = ImageFont.truetype("MALGUN.TTF", 36)
+        font_info = ImageFont.truetype("MALGUN.TTF", 26)  # 소속/연구실명 폰트 (칸 크기에 맞춰 조절)
     except IOError:
         font = ImageFont.load_default()
         
@@ -152,3 +160,4 @@ if st.button("점검표 생성하기", type="primary", width="stretch"):
                 width="stretch"
 
             )
+
