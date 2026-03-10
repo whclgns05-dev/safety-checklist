@@ -136,6 +136,18 @@ st.title("📝 연구실 안전관리 일일점검표 자동 생성기")
 st.write("담당자: **추부건** | 연도와 월을 선택하면 자동으로 평일 점검표가 완성됩니다.")
 st.markdown("---")
 
+# [추가됨] 연구실 정보 입력 칸 (3단 분할)
+st.subheader("🏢 연구실 정보 입력")
+col_info1, col_info2, col_info3 = st.columns(3)
+with col_info1:
+    input_dept = st.text_input("소속", value="안전관리팀")
+with col_info2:
+    input_lab = st.text_input("연구실명", value="제1연구실")
+with col_info3:
+    input_loc = st.text_input("위치", value="본관 101호")
+
+st.markdown("---")
+
 col1, col2 = st.columns(2)
 with col1:
     selected_year = st.selectbox("연도 선택", range(2024, 2031), index=2) 
@@ -165,5 +177,6 @@ if st.button("점검표 생성하기", type="primary", width="stretch"):
                 width="stretch"
 
             )
+
 
 
