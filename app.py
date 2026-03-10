@@ -80,7 +80,7 @@ def create_monthly_checklist(year, month, dept, lab, loc):
     # 폰트 설정
     try:
         font_title = ImageFont.truetype("MALGUN.TTF", 36) # 연도/월 폰트
-        font_info = ImageFont.truetype("MALGUN.TTF", 26)  # 소속/연구실명 폰트 
+        font_info = ImageFont.truetype("MALGUN.TTF", 10)  # 소속/연구실명 폰트 
     except IOError:
         font_title = ImageFont.load_default()
         font_info = ImageFont.load_default()
@@ -170,4 +170,5 @@ if st.button("점검표 생성하기", type="primary", width="stretch"):
                 mime="image/png",
                 width="stretch"
             )
+
 
