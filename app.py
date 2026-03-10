@@ -77,7 +77,7 @@ def create_monthly_checklist(year, month):
     draw.rectangle([(827, 47), (897, 88)], fill="white") # 월 지우기 영역
     
     try:
-        font = ImageFont.truetype("malgun.ttf", 36)
+        font = ImageFont.truetype("MALGUN.TTF", 36)
     except IOError:
         font = ImageFont.load_default()
         
@@ -97,7 +97,7 @@ def create_monthly_checklist(year, month):
             result_img.paste(circle_img, (paste_x, paste_y), circle_img)
 
         # 2. 위쪽 점검자 서명 (signatures 폴더)
-        inspector_img = random.choice(signs_inspector)
+        inspector_img = random.choice(signs_inspector) 
         paste_x_insp = current_x - (sign_size[0] // 2) + random.randint(-2, 2)
         paste_y_insp = sign_y_list[0] - (sign_size[1] // 2) + random.randint(-2, 2)
         result_img.paste(inspector_img, (paste_x_insp, paste_y_insp), inspector_img)
@@ -150,4 +150,5 @@ if st.button("점검표 생성하기", type="primary", width="stretch"):
                 file_name=file_name,
                 mime="image/png",
                 width="stretch"
+
             )
