@@ -10,7 +10,7 @@ import io
 # -------------------------------------------------------------------------
 # 1. 안전점검표 이미지 생성 및 글자 덮어쓰기 함수
 # -------------------------------------------------------------------------
-def create_monthly_checklist(year, month, dept, lab, loc):
+def create_monthly_checklist(year, month, dept, lab, loc, target_day):
     base_image_path = "image_3e5ff8.png"  
     
     # ---------------------------------------------------------
@@ -43,7 +43,9 @@ def create_monthly_checklist(year, month, dept, lab, loc):
     
     valid_days = [
         day for day in range(1, last_day + 1)
-        if date(year, month, day).weekday() < 5 and date(year, month, day) not in kr_holidays
+        if date(year, month, day).weekday() < 5 
+        and date(year, month, day) not in kr_holidays
+        and day <= target_day
     ]
 
     try:
@@ -141,20 +143,26 @@ with col_info3:
 
 st.markdown("---")
 
-# 연도/월 선택 칸 
+# [수정됨] 3단으로 나누어 '일자' 선택 칸을 추가했습니다.
 st.subheader("📅 점검 일자 선택")
-col_date1, col_date2 = st.columns(2)
+col_date1, col_date2, col_date3 = st.columns(3)
 with col_date1:
     selected_year = st.selectbox("연도 선택", range(2024, 2031), index=2) 
 with col_date2:
     selected_month = st.selectbox("월 선택", range(1, 13), index=2)
+with col_date3:
+    # 선택한 연도와 월을 바탕으로 그 달이 며칠까지 있는지 계산합니다.
+    _, max_day = calendar.monthrange(selected_year, selected_month)
+    # 기본값은 항상 그 달의 '마지막 날'로 설정됩니다.
+    selected_day = st.selectbox("며칠까지 점검?", range(1, max_day + 1), index=max_day - 1)
 
 if st.button("점검표 생성하기", type="primary", width="stretch"):
     with st.spinner('달력을 분석하고 문서를 작성 중입니다...'):
-        generated_img = create_monthly_checklist(selected_year, selected_month, input_dept, input_lab, input_loc)
+        # [수정됨] 함수에 selected_day를 함께 넘겨줍니다.
+        generated_img = create_monthly_checklist(selected_year, selected_month, input_dept, input_lab, input_loc, selected_day)
         
         if generated_img:
-            st.success("안전점검표가 성공적으로 생성되었습니다!")
+            st.success(f"{selected_year}년 {selected_month}월 {selected_day}일까지의 안전점검표가 생성되었습니다!")
             
             buf = io.BytesIO()
             generated_img.save(buf, format="PNG")
